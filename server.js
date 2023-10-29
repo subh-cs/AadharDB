@@ -40,6 +40,22 @@ app.get(`/get-info`, async (req, res) => {
 
 });
 
+// Get all users
+app.get(`/get-all`, async (req, res) => {
+    try {
+        const allData = await Aadhar.find();
+        if (allData.length === 0) return res.status(404).json({ message: 'No user found' });
+        return res.status(200).json({
+            message: `All data fetched successfully`,
+            data: allData
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Error fetching user data' });
+    }
+
+});
+
 // Add new user to aadhar database
 app.post('/add-info', async (req, res) => {
     const { aadharNo, name, phoneNo, state } = req.body;
