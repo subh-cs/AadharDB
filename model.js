@@ -17,6 +17,10 @@ const AadharSchema = new Schema({
     state: {
         type: String,
         required: true
+    },
+    lang: {
+        type: String,
+        required: true
     }
 });
 
