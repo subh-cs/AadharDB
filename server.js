@@ -77,7 +77,7 @@ app.post('/add-info', async (req, res) => {
 app.delete('/delete-all', async(req, res) => {
     await Aadhar.deleteMany();
     res.status(200).json({ message: 'All users deleted successfully' });
-}
+})
 
 app.listen(process.env.PORT, () => {
     console.log(`Server started on port ${process.env.PORT}`);
