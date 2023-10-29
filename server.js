@@ -58,13 +58,14 @@ app.get(`/get-all`, async (req, res) => {
 
 // Add new user to aadhar database
 app.post('/add-info', async (req, res) => {
-    const { aadharNo, name, phoneNo, state } = req.body;
+    const { aadharNo, name, phoneNo, state, lang } = req.body;
     try {
         const userData = await Aadhar.create({
             aadharNo: aadharNo,
             name: name,
             phoneNo: phoneNo,
-            state: state
+            state: state,
+            lang: lang
         });
         return res.status(200).json({ message: 'User added successfully', data: userData });
     } catch (error) {
@@ -73,6 +74,10 @@ app.post('/add-info', async (req, res) => {
     }
 });
 
+app.delete('/delete-all', async(req, res) => {
+    await Aadhar.deleteMany();
+    res.status(200).json({ message: 'All users deleted successfully' });
+}
 
 app.listen(process.env.PORT, () => {
     console.log(`Server started on port ${process.env.PORT}`);
